@@ -6,7 +6,7 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:36:48 by tchantro          #+#    #+#             */
-/*   Updated: 2022/07/19 05:38:03 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/07/19 18:22:17 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+size_t	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str == NULL)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
 
 char	*tab_line(const char *s, int i, int j)
 {
@@ -112,7 +124,7 @@ int	ft_atoi(const char *nptr)
 	return (a * k);
 }
 
-char	*error_test(char **str)
+char	**error_test(char **str)
 {
 	int	x;
 	int	y;
@@ -121,6 +133,7 @@ char	*error_test(char **str)
 	x = 0;
 	y = 0;
 	len = ft_strlen(str[y]);
+	printf("%s", str[y]);
 	while (str[y] != NULL)
 	{
 		while (str[y][x])
@@ -129,7 +142,7 @@ char	*error_test(char **str)
  				return (NULL);
 			if (str[y][x] == '-')
 			{
-				if (x != 0 || str[y][++x] == '-' || len = 1)
+				if (x != 0 || str[y][++x] == '-' || len == 1)
 					return (NULL);
 				else
 					x--;
@@ -149,23 +162,29 @@ int	main(int argc, char **argv)
 
 	i = 1;
 	j = 0;
-	if (argc > 2)
+	printf("?\n");
+	printf("%d", argc);
+	if (argc >= 2)
+	//	write (1, "OK", 2);
 	{
-		while (argv[i])
+		while (i < argc - 1)
 		{
+			printf("test");
 			tab[j] = ft_split(argv[i], '\n');
-			tab[j] = error_test(tab[j]);
+			//tab[j] = error_test(tab[j]);
+			//if (error_test(tab[j]) == NULL)
+			//	return(write(2, "Error\n", 6));
 			i++;
 			j++;
 		}
 	}
+	return (0);
+}
 
 	
-/*
-int	main()
+
+/*int	main(int argc, char **argv)
 {
-	//printf("%s", error_test("01324i8"));
-	if (!(error_test("")))
-		return (write(2, "Error\n", 6));
+	printf("%d", argc);
 	return (0);
 }*/
