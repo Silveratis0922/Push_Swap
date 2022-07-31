@@ -93,35 +93,8 @@ char	**ft_split(const char *s, char c)
 	}
 	if (j > 0)
 		str[a++] = tab_line(s, i, j);
-	str[a++] = '\0';
+	str[a] = NULL;
 	return (str);
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int	i;
-	int	j;
-	int	k;
-	int	a;
-
-	i = 0;
-	j = 0;
-	k = 1;
-	a = 0;
-	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
-		i++;
-	while (nptr[i] == '+' || (nptr[i] == '-'))
-	{
-		if (nptr[i] == '-')
-			k = k * -1;
-		i++;
-		j++;
-	}
-	if (j >= 2)
-		return (0);
-	while (nptr[i] >= 48 && nptr[i] <= 57)
-		a = a * 10 + nptr[i++] - 48;
-	return (a * k);
 }
 
 char	**error_test(char **str)
@@ -130,19 +103,20 @@ char	**error_test(char **str)
 	int	y;
 	int	len;
 
-	x = 0;
 	y = 0;
-	len = ft_strlen(str[y]);
-	printf("%s", str[y]);
+	if (str[y] == NULL)
+		return (NULL);
 	while (str[y] != NULL)
 	{
+		x = 0;
+		len = ft_strlen(str[y]);
 		while (str[y][x])
 		{
 			if (!(str[y][x] >= '0' && str[y][x] <= '9' || str[y][x] == '-'))
  				return (NULL);
 			if (str[y][x] == '-')
 			{
-				if (x != 0 || str[y][++x] == '-' || len == 1)
+				if (x != 0 || len == 1 || str[y][++x] == '-' )
 					return (NULL);
 				else
 					x--;
@@ -158,27 +132,27 @@ int	main(int argc, char **argv)
 {
 	int	i;
 	int	j;
+	int	y;
 	char	***tab;
 
 	i = 1;
 	j = 0;
-	printf("?\n");
-	printf("%d", argc);
+	y = 0;
+	tab = malloc (sizeof(char**) * argc - 1);
 	if (argc >= 2)
-	//	write (1, "OK", 2);
 	{
-		while (i < argc - 1)
+		while (argv[i])
 		{
-			printf("test");
-			tab[j] = ft_split(argv[i], '\n');
-			//tab[j] = error_test(tab[j]);
-			//if (error_test(tab[j]) == NULL)
-			//	return(write(2, "Error\n", 6));
+			tab[j] = ft_split(argv[i], ' ');
+			if (error_test(tab[j]) == NULL)
+				return(write(2, "Error\n", 6));
+//			tab[j] = ft_atoi(tab[j]);
 			i++;
 			j++;
+			
 		}
 	}
-	return (0);
+	return (write(1, "OK", 2));
 }
 
 	
