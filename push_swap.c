@@ -6,96 +6,11 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:36:48 by tchantro          #+#    #+#             */
-/*   Updated: 2022/07/19 18:22:17 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/08/05 01:15:50 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str == NULL)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*tab_line(const char *s, int i, int j)
-{
-	int		k;
-	char	*str;
-
-	k = 0;
-	str = malloc(sizeof(char) * j + 1);
-	if (!str)
-		return (0);
-	while (k < j)
-	{
-		str[k] = s[i - j];
-		i++;
-		k++;
-	}
-	str[k] = '\0';
-	return (str);
-}
-
-static int	word_count(const char *s, char c)
-{
-	int	i;
-	int	j;
-	int	word;
-
-	i = 0;
-	j = 0;
-	word = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			j = 0;
-		if (s[i] != c)
-			j++;
-		if (j == 1)
-			word++;
-		i++;
-	}
-	return (word + 1);
-}
-
-char	**ft_split(const char *s, char c)
-{
-	int		i;
-	int		j;
-	int		a;
-	char	**str;
-
-	i = -1;
-	j = 0;
-	a = 0;
-	str = malloc(sizeof(char *) * word_count(s, c));
-	if (!str)
-		return (0);
-	while (s[++i])
-	{
-		if (s[i] == c && j > 0)
-		{
-			str[a++] = tab_line(s, i, j);
-			j = 0;
-		}
-		else if (s[i] != c)
-			j++;
-	}
-	if (j > 0)
-		str[a++] = tab_line(s, i, j);
-	str[a] = NULL;
-	return (str);
-}
+#include "push_swap.h"
 
 char	**error_test(char **str)
 {
@@ -112,7 +27,7 @@ char	**error_test(char **str)
 		len = ft_strlen(str[y]);
 		while (str[y][x])
 		{
-			if (!(str[y][x] >= '0' && str[y][x] <= '9' || str[y][x] == '-'))
+			if (!((str[y][x] >= '0' && str[y][x] <= '9') || (str[y][x] == '-')))
  				return (NULL);
 			if (str[y][x] == '-')
 			{
@@ -128,7 +43,14 @@ char	**error_test(char **str)
 	return (str);
 }
 
-int	main(int argc, char **argv)
+void	ft_lstremove(t_list *lst)
+{
+	if (lst == NULL)
+		return ;
+	free(lst);
+}
+
+/*int	main(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -153,12 +75,25 @@ int	main(int argc, char **argv)
 		}
 	}
 	return (write(1, "OK", 2));
-}
+}*/
 
 	
-
-/*int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	printf("%d", argc);
+	(void) argc;
+	(void) argv;
+	t_list *list = NULL;
+
+	list = ft_lstnew(1);
+	printf("%d", list->content);
+	ft_lstadd_back(&list, ft_lstnew(2));
+	ft_lstadd_back(&list, ft_lstnew(3));
+	ft_lstadd_back(&list, ft_lstnew(4));
+	ft_lstadd_back(&list, ft_lstnew(5));
+	ft_lstadd_back(&list, ft_lstnew(6));
+	ft_lstadd_back(&list, ft_lstnew(7));
+	printf("%d", list->next->content);
+	ft_lstswap(list);
+//	lst_rotate(list);
 	return (0);
-}*/
+}
