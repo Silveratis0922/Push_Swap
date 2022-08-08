@@ -6,7 +6,7 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 16:36:48 by tchantro          #+#    #+#             */
-/*   Updated: 2022/08/05 01:15:50 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:54:05 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ char	**error_test(char **str)
 	return (str);
 }
 
-void	ft_lstremove(t_list *lst)
-{
-	if (lst == NULL)
-		return ;
-	free(lst);
-}
-
 /*int	main(int argc, char **argv)
 {
 	int	i;
@@ -82,18 +75,34 @@ int	main(int argc, char **argv)
 {
 	(void) argc;
 	(void) argv;
-	t_list *list = NULL;
+	t_list	*list = NULL;
+	t_list	*blist = NULL;
 
-	list = ft_lstnew(1);
-	printf("%d", list->content);
-	ft_lstadd_back(&list, ft_lstnew(2));
-	ft_lstadd_back(&list, ft_lstnew(3));
+
+	blist = ft_lstnew(1);
+	ft_lstadd_back(&blist, ft_lstnew(2));
+	list = ft_lstnew(3);
+	//ft_lstadd_back(&list, ft_lstnew(3));
 	ft_lstadd_back(&list, ft_lstnew(4));
 	ft_lstadd_back(&list, ft_lstnew(5));
 	ft_lstadd_back(&list, ft_lstnew(6));
 	ft_lstadd_back(&list, ft_lstnew(7));
-	printf("%d", list->next->content);
-	ft_lstswap(list);
+	lst_push(&blist, &list);
+	lst_push(&blist, &list);
+	while (list != NULL)
+	{
+		printf("%d", list->content);
+		list = list->next;
+	}
+	printf("\n");
+	 while (blist != NULL)
+        {
+                printf("%d", blist->content);
+                blist = blist->next;
+        }
+//	printf("%d", list->content);
+//	printf("%d", list->next->content);
+//	printf("%d", list->next->content);
 //	lst_rotate(list);
 	return (0);
 }

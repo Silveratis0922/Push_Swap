@@ -6,7 +6,7 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 00:43:12 by tchantro          #+#    #+#             */
-/*   Updated: 2022/08/05 00:51:46 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:35:12 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 # include "libft.h"
 
 char	**error_test(char **str);
-void	lst_rotate(t_list *list);
+void	lst_rotate(t_list **list);
 void	ft_lstswap(t_list *list);
+void    lst_reverse_rotate(t_list **list);
+void    lst_push(t_list **output, t_list **input);
 
 #endif

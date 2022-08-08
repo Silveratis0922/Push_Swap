@@ -2,38 +2,33 @@ LIBFT = ./Libft/libft.a
 
 NAME = push_swap
 
-CC = gcc 
+CC =  gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -g3 #-Wextra -Werror
 
-SRC = push_swap.c lst_rotate.c ft_lstrotate.c
-        
-#BONUS_SRC = 
-            
-OBJ = ${SRC:.c=.o}
+SRC = push_swap.c ft_lstswap.c lst_rotate.c lst_reverse_rotate.c lst_push.c
 
-OBJ_BONUS = ${BONUS_SRC:.c=.o}
-
+OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME) : $(LIBFT) $(OBJ)
 	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) -L./Libft -lft
 
-$(LIBFT):
-	 make -C Libft
+$(LIBFT) :
+	make -C Libft
 
-.c.o:
-	${CC} ${CFLAGS} -I . -I Libft -c $< -o ${<:.c=.o}
+%.o:%.c
+	$(CC) $(CFLAGS) -o $@ -c $< -I . -I Libft
 
-clean: 
-	/bin/rm -f *.o
-	/bin/rm -f */*.o
+clean : 
+	rm -f $(OBJ)
+	make clean -C Libft
 
-fclean: clean
-	/bin/rm -f $(NAME)
-	/bin/rm -f $(LIBFT)
+fclean : clean
+	rm -f $(NAME)
+	make fclean -C Libft
 
-re: fclean all
+re : fclean all
 
-.PHONY: all clean fclean bonus re
+.PHONY : all clean fclean re

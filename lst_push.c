@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_rotate.c                                       :+:      :+:    :+:   */
+/*   lst_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 18:41:05 by tchantro          #+#    #+#             */
-/*   Updated: 2022/08/06 04:32:07 by tchantro         ###   ########.fr       */
+/*   Created: 2022/08/08 15:21:03 by tchantro          #+#    #+#             */
+/*   Updated: 2022/08/08 15:51:43 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	lst_rotate(t_list **list)
+void	lst_push(t_list **output, t_list **input)
 {
-	int	tmp;
 	t_list	*first;
 
-	first = (*list);
-	tmp = first->content;
+	first = *output;
+	if ((*input) == NULL)
+	{
+		*input = ft_lstnew(first->content);
+	}
+	else
+	{
+		ft_lstadd_front(input, ft_lstnew(first->content));
+	}
 	first = first->next;
-	ft_lstadd_back(list, ft_lstnew(tmp));
-	free(*list);
-	*list = first;
-	//ft_lstadd_back(list, ft_lstnew(tmp));
+	free(*output);
+	*output = first;
 }
