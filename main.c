@@ -6,7 +6,7 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 11:53:20 by tchantro          #+#    #+#             */
-/*   Updated: 2022/09/03 15:25:02 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:01:37 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	main(int argc, char **argv)
 		}
 		res = verif_overflow(tab, &a_list);
 		if (res == 1)
-			return (write (2, "Error0\n", 6));
+			return (write (2, "Error Double\n", 13));
 	}
 	test_algo(&a_list, &b_list);
-	while (a_list != NULL)
+/*	while (a_list != NULL)
 	{
 		printf("l'element de ma liste a est : [%d]", a_list->content);
 		printf("      Index a : (%d)\n", a_list->index);
@@ -60,6 +60,6 @@ int	main(int argc, char **argv)
 		printf("      cost_a : <%d>\n", b_list->cost_a);
 		printf("      cost_b : %d\n", b_list->cost_b);
                 b_list = b_list->next;
-        }
-	return (write(1, "OK", 2));
+        }*/
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:13:24 by tchantro          #+#    #+#             */
-/*   Updated: 2022/09/03 15:10:37 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/09/03 19:02:29 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,15 @@ void	struct_t_pos_bis(t_list **a_list, t_list **b_list)
 	t_list	*first_a;
 
 	first_a = (*a_list);
-	while (!((*b_list)->index > (*a_list)->index
+	while ((*a_list)->next != NULL && !((*b_list)->index > (*a_list)->index
 			&& (*b_list)->index < (*a_list)->next->index))
 	{
-		if ((*a_list)->next == NULL)
-		{
-			(*b_list)->t_pos = 0;
-			break ;
-		}
 		(*a_list) = (*a_list)->next;
 	}
 	if ((*a_list)->next != NULL)
 		(*b_list)->t_pos = (*a_list)->next->pos;
+	else if ((*a_list)->next == NULL)
+		(*b_list)->t_pos = 0;
 	(*a_list) = first_a;
 }
 

@@ -6,7 +6,7 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 11:57:31 by tchantro          #+#    #+#             */
-/*   Updated: 2022/09/03 15:34:03 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:01:18 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	test_algo(t_list **a_list, t_list **b_list)
 	sort_tab = ft_sort_list(a_list);
 	if (sort_tab == NULL)
 		return (1);
-	printf("La mediane est :{%d}\n", sort_tab[ft_lstsize(*a_list) / 2]);
+//	printf("La mediane est :{%d}\n", sort_tab[ft_lstsize(*a_list) / 2]);
 	ft_index_list(a_list, sort_tab);
 	push_list(a_list, b_list);
 	only_three(a_list);

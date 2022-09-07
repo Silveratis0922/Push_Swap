@@ -6,7 +6,7 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:20:28 by tchantro          #+#    #+#             */
-/*   Updated: 2022/09/03 15:34:52 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/09/03 19:54:54 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,37 +130,3 @@ void	second_algo_part(t_list **a_list, t_list **b_list)
 		lst_push(a_list, b_list, 3);
 	}
 }
-
-/*void	mini_to_the_top(t_list **a_list)
-{
-	t_list	*first;
-	t_list	*index_zero;
-	int	cost_b;
-
-	first = (*a_list);
-	index_zero = (*a_list);
-	while ((*a_list)!= NULL)
-	{
-		if ((*a_list)->index == 0)
-		{
-			index_zero = (*a_list);
-			cost_b = index_zero->cost_b;
-			break ;
-		}
-		(*a_list) = (*a_list)->next;
-	}
-	(*a_list) = first;
-	while (cost_b != 0)
-	{
-		if (cost_b > 0)
-		{
-			lst_rotate(a_list, 5);
-			cost_b--;
-		}
-		else
-		{
-			lst_reverse_rotate(a_list, 7);
-			cost_b++;
-		}
-	}
-}*/
