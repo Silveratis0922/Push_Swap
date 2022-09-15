@@ -6,7 +6,7 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 14:02:08 by tchantro          #+#    #+#             */
-/*   Updated: 2022/09/01 21:20:02 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/09/14 15:16:25 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,29 +75,45 @@ int	creat_list(t_list **list, int atoi_res)
 	return (0);
 }
 
-int	verif_overflow(char ***str, t_list **list)
+char	*string_error(char *str)
 {
-	int	split;
-	int	atoi_res;
-	int	line;
-	int	res;
+	int	i;
+	int	len;
 
-	split = 0;
-	line = 0;
-	while (str[split])
+	i = 0;
+	len = ft_strlen(str);
+	while (str[i])
 	{
-		while (str[split][line])
+		if (!((str[i] >= '0' && str[i] <= '9') || (str[i] == '-')))
+			return (NULL);
+		if (str[i] == '-')
 		{
-			atoi_res = ft_atoi(str[split][line]);
-			if (verif_size_line(str[split][line]) != verif_atoi_output(atoi_res))
-				return (1);
-			res = creat_list(list, atoi_res);
-			if (res == 1)
-				return (1);
-			line++;
+			if (i != 0 || len == 1)
+				return (NULL);
 		}
-		split++;
-		line = 0;
+		i++;
 	}
+	if (len == 0)
+		return (NULL);
+	return (str);
+}
+
+int	all_parsing(char *str, t_list **list)
+{
+	int		atoi_res;
+	int		res;
+	char	*str_res;
+
+	str_res = string_error(str);
+	if (str_res == NULL)
+	{
+		return (1);
+	}
+	atoi_res = ft_atoi(str);
+	if (verif_size_line(str) != verif_atoi_output(atoi_res))
+		return (2);
+	res = creat_list(list, atoi_res);
+	if (res == 1)
+		return (3);
 	return (0);
 }

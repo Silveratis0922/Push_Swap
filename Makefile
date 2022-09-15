@@ -6,7 +6,8 @@ CC =  gcc
 
 CFLAGS = -Wall -g3 -Wextra -Werror
 
-SRC = main.c push_swap.c moves.c verif_overflow.c ft_sort_list.c algo.c struct_content.c write_action.c struct_cost_a.c count_move.c
+SRC = main.c already_ordered.c verif_overflow.c moves.c ft_sort_list.c first_algo.c struct_content.c write_action.c struct_cost_a.c \
+	count_move.c delete_lst.c final_algo.c 
 
 OBJ = $(SRC:.c=.o)
 
@@ -22,7 +23,7 @@ $(LIBFT) :
 	$(CC) $(CFLAGS) -o $@ -c $< -I . -I Libft
 
 random_100 :
-	seq 1 100 | sort -R | tr "\n" " "; echo
+	seq 1 50 | sort -R | tr "\n" " "; echo
 
 random_500 :
 	seq 1 500 | sort -R | tr "\n" " "; echo

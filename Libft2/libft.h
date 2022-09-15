@@ -6,7 +6,7 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 10:48:31 by tchantro          #+#    #+#             */
-/*   Updated: 2022/09/02 14:33:41 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/09/15 12:22:31 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 
 typedef struct s_list
 {
-	int			content;
-	int			index;
-	int			pos;
-	int			t_pos;
-	int			cost_a;
-	int			cost_b;
+	int				content;
+	int				index;
+	int				pos;
+	int				t_pos;
+	int				cost_a;
+	int				cost_b;
 	struct s_list	*next;
 }					t_list;
 

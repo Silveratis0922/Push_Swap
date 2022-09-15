@@ -6,27 +6,11 @@
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:13:24 by tchantro          #+#    #+#             */
-/*   Updated: 2022/09/03 19:02:29 by tchantro         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:19:47 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	struct_pos(t_list **list)
-{
-	t_list	*first;
-	int		pos;
-
-	pos = 0;
-	first = (*list);
-	while ((*list) != NULL)
-	{
-		(*list)->pos = pos;
-		(*list) = (*list)->next;
-		pos++;
-	}
-	(*list) = first;
-}
 
 t_list	*found_max(t_list **a_list, t_list *index_max)
 {
@@ -59,67 +43,52 @@ void	struct_t_pos_bis(t_list **a_list, t_list **b_list)
 	(*a_list) = first_a;
 }
 
+void	t_pos_again(t_list **a_list, t_list **b_list, int nbr, t_list *ind_min)
+{
+	t_list	*first;
+
+	first = (*a_list);
+	nbr = 0;
+	while ((*a_list) != NULL && (*b_list)->index < (*a_list)->index)
+	{
+		ind_min = found_min(a_list, ind_min);
+		(*a_list) = (*a_list)->next;
+		nbr++;
+	}
+	(*a_list) = first;
+	if (nbr == ft_lstsize(*a_list))
+	{
+		(*b_list)->t_pos = ind_min->pos;
+	}
+	else
+		struct_t_pos_bis(a_list, b_list);
+}
+
 void	struct_t_pos(t_list **a_list, t_list **b_list)
 {
 	t_list	*first_a;
 	t_list	*first_b;
-	t_list	*index_max;
-	t_list	*index_min;
+	t_list	*index_save;
 	int		nbr;
 
 	first_a = (*a_list);
 	first_b = (*b_list);
-	index_max = (*a_list);
-	index_min = (*a_list);
+	index_save = (*a_list);
 	while ((*b_list) != NULL)
 	{
 		nbr = 0;
 		while ((*a_list) != NULL && (*b_list)->index > (*a_list)->index)
 		{
-			index_max = found_max(a_list, index_max);
+			index_save = found_max(a_list, index_save);
 			(*a_list) = (*a_list)->next;
 			nbr++;
 		}
 		(*a_list) = first_a;
 		if (nbr == ft_lstsize(*a_list))
-			(*b_list)->t_pos = index_max->pos + 1;
+			(*b_list)->t_pos = index_save->pos + 1;
 		else if (nbr != ft_lstsize (*a_list))
-		{
-			nbr = 0;
-			while ((*a_list) != NULL && (*b_list)->index < (*a_list)->index)
-			{
-				index_min = found_min(a_list, index_min);
-				(*a_list) = (*a_list)->next;
-				nbr++;
-			}
-			(*a_list) = first_a;
-		}
-		if (nbr == ft_lstsize(*a_list))
-			(*b_list)->t_pos = index_min->pos;
-		else
-			struct_t_pos_bis(a_list, b_list);
+			t_pos_again(a_list, b_list, nbr, index_save);
 		(*b_list) = (*b_list)->next;
 	}
 	(*b_list) = first_b;
-}
-
-void	struct_cost_b(t_list **list)
-{
-	t_list	*first;
-	int		size;
-	int		move_nbr;
-
-	first = (*list);
-	size = ft_lstsize(*list);
-	move_nbr = 0;
-	while ((*list) != NULL)
-	{
-		if (move_nbr <= size / 2)
-			(*list)->cost_b = move_nbr;
-		else
-			(*list)->cost_b = move_nbr - size;
-		(*list) = (*list)->next;
-		move_nbr++;
-	}
-	(*list) = first;
 }

@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   delete_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchantro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/14 11:22:09 by tchantro          #+#    #+#             */
-/*   Updated: 2022/09/15 11:39:28 by tchantro         ###   ########.fr       */
+/*   Created: 2022/09/15 09:36:03 by tchantro          #+#    #+#             */
+/*   Updated: 2022/09/15 09:56:39 by tchantro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	delete_lst(t_list **a_list)
 {
-	int		i;
-	t_list	*a_list;
-	t_list	*b_list;
+	t_list	*tmp;
 
-	i = 1;
-	a_list = NULL;
-	b_list = NULL;
-	if (argc > 1)
+	while ((*a_list) != NULL)
 	{
-		while (argv[i])
-		{
-			if (all_parsing(argv[i], (&a_list)) != 0)
-				return (write(2, "Error\n", 6));
-			i++;
-		}
-		if (first_algo(&a_list, &b_list) != 0)
-			return (write(2, "Error\n", 6));
+		tmp = (*a_list)->next;
+		free(*a_list);
+		(*a_list) = tmp;
 	}
-	return (0);
+	(*a_list) = NULL;
 }
